@@ -20,11 +20,33 @@
         <!-- Fim - navbar -->
         
             <!-- inicio - Conteudo -->
-            <h1>Page Home</h1>
-    <hr/><center>
-        <img src="imagens/img1.jpg" alt="" width="1280" height="473"/>
-            <br/><br/><a href="quiz.jsp" class="btn btn-danger">teste</a>
-    </center>
+           
+        
+            
+            <!--
+            <form>
+             
+                <div class="form-row">
+                    <div class="form-group col-sm-4">
+                        <label for="inputCadastro">Cadastre-se:</label>
+                        <input type="text" class="form-control" id="inputCadastro" placeholder="Seu Nome">
+                        <input type="submit" class="btn btn-warning" id="inputCadastro" value="Cadastra">
+                        
+                    </div>
+                    <div class="form-group col-sm-4">
+                        <label for="inputLogin">Login:</label>
+                        <input type="text" class="form-control" id="inputLogin" placeholder="Seu Nome">
+                         <input type="submit" class="btn btn-success" id="inputLogin" value="Login">
+                    </div>
+                </div>
+                
+            </form>-->
+         
+                        <!-- test-->
+            
+                <img src="imagens/img1.jpg" alt="" width="1280" height="473"/>
+                    <br/><br/><a href="quiz.jsp" class="btn btn-danger">teste</a>
+            </center>
             <!-- Fim - Conteudo -->
         
         <!-- inicio - footer -->

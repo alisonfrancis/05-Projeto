@@ -4,6 +4,8 @@
     Author     : Alison
 --%>
 
+<%@page import="br.com.fatepg.projeto05.Question"%>
+<%@page import="br.com.fatepg.projeto05.Quiz"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -21,9 +23,22 @@
         
             <!-- inicio - Conteudo -->
             <h1>Page Quiz</h1>
-    <br/><center>
-            <img src="imagens/img1.jpg" alt="" width="1280" height="473"/>
-            <br/><br/><a href="home.jsp" class="btn btn-info">volta</a>
+   <center>
+               <h2>Responda as pegunatas Abaixo</h2>
+        <form action="home.jsp">
+            <%for(int i=0; i<Quiz.getTest().size();i++){%>                
+            <% Question q =Quiz.getTest().get(i);%>
+            <h3><%= q.getQuestion() %></h3>
+             <%for(int i2=0; i2<q.getAltenatives().length;i2++){%>
+             <input type="radio" name="<%= q.getQuestion()%>"
+                    value="<%= q.getAltenatives()[i2]%>"/>
+             <%= q.getAltenatives()[i2]%>
+             <%}%>
+            
+            <%}%>
+            <hr/>
+            <input type="submit" name="testd" value="Volta" class="btn btn-info">
+        </form>
     </center>
             <!-- Fim - Conteudo -->
         
