@@ -1,56 +1,86 @@
-<%-- 
-    Document   : home
-    Created on : 09/05/2018, 09:39:26
-    Author     : Alison
---%>
-
+<%@page import="br.com.fatecpg.quiz.Question"%>
+<%@page import="br.com.fatecpg.quiz.Quiz"%>
+<%@page import="br.com.fatecpg.quiz.BancoUsuarios"%>
+<%@page import="br.com.fatecpg.quiz.Usuarios"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%
+    boolean tested = false;
+    double grade = 0.0;
+    
+    if (request.getParameter("tested") != null) {
+        tested = true;
+        int count = 0;
+        
+        for (int i = 0; i < Quiz.getTest().size(); i++) {
+            Question q = Quiz.getTest().get(i);
+            String userAnswer = request.getParameter(q.getQuestion());
+            
+            if (q.getAnswer().equals(userAnswer)) {
+                count++;
+            }
+        }
+        grade = 100.0 * ((double) (count) / (double) (Quiz.getTest().size()));
+        
+        //String pontos = Double.toString(grade);
+        
+        Usuarios novoPonto = new Usuarios();
+        novoPonto.setPonto(grade);
+        BancoUsuarios.getUserPonto().add(novoPonto);
+    }
+%>
+
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP QUIZ</title>
-        <!-- inicio - tags meta e links-->
-        <%@include file="WEB-INF/jspf/meta_links.jspf" %>
-        <!-- Fim - tags meta e links -->
+        <title>Home - Web Quiz</title>
     </head>
     <body>
-        <!-- inicio - navbar -->
-        <%@include file="WEB-INF/jspf/navbar.jspf" %>
-        <!-- Fim - navbar -->
+        <h1>Web Quiz</h1>
+        <h2>Home</h2>
+        <%if (tested) {%>
+            <hr />
+            <h3><%= session.getAttribute("nome") %>, você acertou: <%= grade %>%</h3>
+            <hr />
+        <% } %>
         
-            <!-- inicio - Conteudo -->
-           
-        
-            
-            <!--
-            <form>
-             
-                <div class="form-row">
-                    <div class="form-group col-sm-4">
-                        <label for="inputCadastro">Cadastre-se:</label>
-                        <input type="text" class="form-control" id="inputCadastro" placeholder="Seu Nome">
-                        <input type="submit" class="btn btn-warning" id="inputCadastro" value="Cadastra">
-                        
-                    </div>
-                    <div class="form-group col-sm-4">
-                        <label for="inputLogin">Login:</label>
-                        <input type="text" class="form-control" id="inputLogin" placeholder="Seu Nome">
-                         <input type="submit" class="btn btn-success" id="inputLogin" value="Login">
-                    </div>
-                </div>
-                
-            </form>-->
-         
-                        <!-- test-->
-            
-                <img src="imagens/img1.jpg" alt="" width="1280" height="473"/>
-                    <br/><br/><a href="quiz.jsp" class="btn btn-danger">teste</a>
-            </center>
-            <!-- Fim - Conteudo -->
-        
-        <!-- inicio - footer -->
-        <%@include file="WEB-INF/jspf/footer.jspf" %>
-        <!-- Fim - footer -->
+        <form action="quiz.jsp" method="post">
+            Usuario: <input type="text" name="usuario" required/><br><br>
+            <input type="submit" value="Começar o quiz" name="enviar">
+        </form>
+    <hr />
+    <table border="1">
+        <h3>Ultimos 10 testes</h3>
+        <tr>
+            <th>Usuarios</th>
+            <th>Pontuação</th>
+        </tr>
+<% for (int i = 0; i < BancoUsuarios.getUsuarios().size(); i++){ %>
+        <tr>
+            <td><%= BancoUsuarios.getUsuarios().get(i).getNome() %></td>
+            <td><%= BancoUsuarios.getUserPonto().get(i).getPonto() %></td>
+        </tr>
+    
+<%}%>
+<!--
+    </table>
+    <table border="1">
+        <h3>Ranking</h3>
+        <tr>
+            <th>Usuarios</th>
+            <th>Pontuação</th>
+        </tr>
+//for (int i = 0; i < BancoUsuarios.getUsuarios().size(); i++){ %>
+//for (int x = 1; x < BancoUsuarios.getUsuarios().size(); x++){ %>
+// if (BancoUsuarios.getUserPonto().get(i).getPonto() > BancoUsuarios.getUserPonto().get(x).getPonto()){ %>
+        <tr>
+            <td>//= BancoUsuarios.getUsuarios().get(i).getNome() %></td>
+            <td>//= BancoUsuarios.getUserPonto().get(i).getPonto() %></td>
+        </tr>
+    
+//}%>
+
+    </table>
+-->
     </body>
 </html>
