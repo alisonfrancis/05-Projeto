@@ -1,6 +1,6 @@
 
-<%@page import="br.com.fatec.quiz.Bd"%>
-<%@page import="br.com.fatec.quiz.Usuario"%>
+<%@page import="br.com.fatecpg.quiz.BancoUsuarios"%>
+<%@page import="br.com.fatecpg.quiz.Usuarios"%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -13,9 +13,9 @@
         
         <%
     if(request.getParameter("entrar") != null){
-        Usuario u = new Usuario();
-        u.setUserName(request.getParameter("userName"));
-        Bd.getUser().add(u);
+        Usuarios u = new Usuarios();
+        u.setNome(request.getParameter("userName"));
+        BancoUsuarios.getUsuarios().add(u);
     }
 %>
 
