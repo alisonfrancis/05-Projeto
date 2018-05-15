@@ -1,8 +1,8 @@
 
-<%@page import="br.com.fatecpg.quiz.Question"%>
-<%@page import="br.com.fatecpg.quiz.Quiz"%>
-<%@page import="br.com.fatecpg.quiz.BancoUsuarios"%>
-<%@page import="br.com.fatecpg.quiz.Usuarios"%>
+<%@page import="br.com.fatec.quiz.Question"%>
+<%@page import="br.com.fatec.quiz.Quiz"%>
+<%@page import="br.com.fatec.quiz.Bd"%>
+<%@page import="br.com.fatec.quiz.Usuario"%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
@@ -18,16 +18,16 @@
         
         int count = 0;
         
-        for(int i=0; i<Quiz.getTest().size(); i++){
+        for(int i=0; i<Quiz.getTeste().size(); i++){
             
-            Question q = Quiz.getTest().get(i);
+            Question q = Quiz.getTeste().get(i);
             String userAnswer = request.getParameter(q.getQuestion());
             
             if(q.getAnswer().equals(userAnswer))
                 count++;
         }
         
-                       grade = 100.0 * ((double) (count) / (double) (Quiz.getTest().size()));
+                       grade = 100.0 * ((double) (count) / (double) (Quiz.getTeste().size()));
 
     }
 %>
@@ -47,14 +47,15 @@
         
     <center>
         
+        <a href="Home.jsp"><button>Sair</button></a>
         
         <br><br>
         
-        <h4 class="font">Seja Bem Vindo</h4><br>
+        <h4 class="font">Bem Vindo <%= session.getAttribute("loginUsuario") %></h4><br>
         
-        <h4 class="font">Começar o teste:</h4> <br>
+        <h4 class="font">Começar o teste: </h4> <br>
         
-        <h3 class="text-center"><a href="quiz.jsp"><button type="button">Clique aqui</button></a></h3>
+        <h3 class="text-center"><a href="Quiz.jsp"><button type="button">Clique aqui</button></a></h3>
         
         <br>
         
